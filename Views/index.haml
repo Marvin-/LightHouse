@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title IdeaBox
+  %body
+    %h1 IdeaBox
+    %form{:action => "/", :method => "POST"}
+      %p
+        Your Idea:
+      %input{:name => "idea_title", :type => "text"}/
+      %br/
+      %textarea{:name => "idea_description"}
+      %br/
+      %input{:type => "submit"}/
