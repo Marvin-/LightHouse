@@ -13,3 +13,12 @@
       %textarea{:name => "idea_description"}
       %br/
       %input{:type => "submit"}/
+
+    %h3
+      Existing Ideas
+    %ul
+      - thoughts.each do |thought|
+        %li
+          = thought.title
+          %br/
+          = thought.description

@@ -5,19 +5,19 @@ class LightHouseApp < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  not_found do 
-    haml :error
-  end
+  # not_found do 
+  #   haml :error
+  # end
 
   get '/' do 
-    haml :index
+    haml :index, locals: {thoughts: Thought.all}
   end
 
   post '/' do
-    thought = Thought.new
+    thought = Thought.new(params["idea_title"], params["idea_description"])
     thought.save
-    
-    "Creating a thought!"
+
+    redirect '/'
   end
 
 end

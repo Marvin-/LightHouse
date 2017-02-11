@@ -15,7 +15,23 @@ class Thought
     end
   end
 
+  def self.all
+    raw_ideas.map do |data|
+      new(data[:title], data[:description])
+    end
+  end
+
+  def self.raw_ideas
+    database.transaction do |db|
+      db['thoughts'] || []
+    end
+  end
+  
+  def self.database
+    @database ||= YAML::Store.new("thoughts")
+  end
+
   def database
-    @database ||= YAML::Store.new "thoughts"
+    Thought.database
   end
 end
