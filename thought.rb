@@ -26,6 +26,12 @@ class Thought
       db['thoughts'] || []
     end
   end
+
+  def self.delete(position)
+    database.transaction do 
+      database['thoughts'].delete_at(position)
+    end
+  end
   
   def self.database
     @database ||= YAML::Store.new("thoughts")
