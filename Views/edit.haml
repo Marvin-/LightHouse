@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title LightHouse
+  %body
+    %h1 LightHouse
+    %form{:action => "/#{id}", :method => "POST"}
+      %p
+        Edit your Idea:
+      %input{:name => "_method", :type => "hidden", :value => "PUT"}/
+      %input{:name => "idea_title", :type => "text", :value => "#{thought.title}"}/
+      %br/
+      %textarea{:name => "idea_description"}= thought.description
+      %br/
+      %input{:type => "submit"}/
