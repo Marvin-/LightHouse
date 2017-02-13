@@ -12,11 +12,12 @@ class LightHouseApp < Sinatra::Base
   end
 
   get '/' do 
+    # binding.pry
     haml :index, locals: {thoughts: Thought.all}
   end
 
   post '/' do
-    thought = Thought.new(params["idea_title"], params["idea_description"])
+    thought = Thought.new(params[:idea])
     thought.save
 
     redirect '/'
@@ -29,8 +30,8 @@ class LightHouseApp < Sinatra::Base
 
   put '/:id' do |id|
     data = {
-      :title => params[:idea_title],
-      :descrption => params[:idea_description]
+      :title => params[:thought][:title],
+      :descrption => params[:thought][:description]
     }
 
     Thought.update(id.to_i, data)

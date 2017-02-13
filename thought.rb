@@ -1,23 +1,22 @@
 require 'yaml/store'
 
 class Thought
-  attr_reader :title, :description
-
-  def initialize(title, description)
-    @title = title
-    @description = description
-  end
+attr_accessor :title, :description
+def initialize(attributes)
+  @title = attributes["title"]
+  @description = attributes["description"]
+end
 
   def save
     database.transaction do |db|
       db["thoughts"] ||= []
-      db["thoughts"] << {title: title, description: description}
+      db["thoughts"] << {"title" => title, "description" => description}
     end
   end
 
   def self.all
     raw_ideas.map do |data|
-      new(data[:title], data[:description])
+      Thought.new(data)
     end
   end
 
@@ -35,7 +34,7 @@ class Thought
 
   def self.find(id)
     raw_idea = find_raw_thought(id)
-    Thought.new(raw_idea[:title], raw_idea[:description])
+    Thought.new(raw_idea)
   end
 
   def self.find_raw_thought(id)

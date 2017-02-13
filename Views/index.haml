@@ -1,30 +1,24 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title IdeaBox
-  %body
-    %h1 IdeaBox
-    %form{:action => "/", :method => "POST"}
-      %p
-        Your Idea:
-      %input{:name => "idea_title", :type => "text"}/
-      %br/
-      %textarea{:name => "idea_description"}
-      %br/
-      %input{:type => "submit"}/
+%h1 Your Idea
+%form{:action => "/", :method => "POST"}
+  %p
+    Your Idea:
+  %input{:name => "thought[title]", :type => "text"}/
+  %br/
+  %textarea{:name => "thought[description]"}
+  %br/
+  %input{:type => "submit"}/
 
-    %h3
-      Existing Ideas
-    %ul
-      - thoughts.each_with_index do |thought, id|
-        %li
-          = thought.title
-          = "(#{id})"
-          %br/
-          = thought.description
-          %form{:action => "/#{id}", :method => "POST"}
-            %a{:href => "/#{ id}/edit"}Edit
-            %input{:name => "_method", :type => "hidden", :value => "DELETE"}/
-            %input{:type => "submit", :value => "delete"}/
+%h3
+  Existing Ideas
+%ul
+  - thoughts.each_with_index do |thought, id|
+    %li
+      = thought.title
+      = "(#{id})"
+      %br/
+      = thought.description
+      %form{:action => "/#{id}", :method => "POST"}
+        %a{:href => "/#{ id}/edit"}Edit
+        %input{:name => "_method", :type => "hidden", :value => "DELETE"}/
+        %input{:type => "submit", :value => "delete"}/
 
