@@ -1,4 +1,5 @@
 require "./thought"
+require "./thought_store"
 
 class LightHouseApp < Sinatra::Base
   set :method_override, true
@@ -13,12 +14,11 @@ class LightHouseApp < Sinatra::Base
 
   get '/' do 
     # binding.pry
-    haml :index, locals: {thoughts: Thought.all}
+    haml :index, locals: {thoughts: ThoughtStore.all, thought: Thought.new(params)}
   end
 
   post '/' do
-    thought = Thought.new(params[:idea])
-    thought.save
+    thought = ThoughtStore.create(params[:thought])
 
     redirect '/'
   end

@@ -18,7 +18,7 @@
       %br/
       = thought.description
       %form{:action => "/#{id}", :method => "POST"}
-        %a{:href => "/#{ id}/edit"}Edit
+        %a{:href => "/#{id}/edit"}Edit
         %input{:name => "_method", :type => "hidden", :value => "DELETE"}/
         %input{:type => "submit", :value => "delete"}/
 
