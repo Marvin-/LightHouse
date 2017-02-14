@@ -38,7 +38,7 @@ class ThoughtStore
   end
 
   def self.database
-    @database ||= YAML::Store.new("thoughts")
+    @database ||= YAML::Store.new("db/thoughts")
   end
 
   def self.create(attributes)

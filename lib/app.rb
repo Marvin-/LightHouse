@@ -1,8 +1,8 @@
-require "./thought"
-require "./thought_store"
+require "thought_box"
 
 class LightHouseApp < Sinatra::Base
   set :method_override, true
+  set :root, 'lib/app'
   
   configure :development do
     register Sinatra::Reloader
@@ -24,7 +24,7 @@ class LightHouseApp < Sinatra::Base
   end
 
   get '/:id/edit' do |id|
-    thought = Thought.find(id.to_i)
+    thought = ThoughtStore.find(id.to_i)
     haml :edit, locals: {id: id, thought: thought}
   end
 
@@ -34,12 +34,12 @@ class LightHouseApp < Sinatra::Base
       :descrption => params[:thought][:description]
     }
 
-    Thought.update(id.to_i, data)
+    ThoughtStore.update(id.to_i, data)
     redirect '/'
   end
 
   delete '/:id' do |id|
-    Thought.delete(id.to_i)
+    ThoughtStore.delete(id.to_i)
     redirect '/'
   end
 
